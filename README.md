@@ -15,3 +15,14 @@ To setup PHPMyAdmin for GitPod:
 5. At the browser, add `/phpmyadmin` to the end of the URL in the address bar
 6. Login with user `root` and no password.
 
+## How to Login:
+At the termonal: `mysql -u root` 
+
+Create a database:
+`create database <name of the database>`
+
+Show databases:
+`show databases;`
+
+Switch database:
+`use <name_of_the_database>`
