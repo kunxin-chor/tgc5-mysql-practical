@@ -25,3 +25,4 @@ alter table `customers`
 
 /* updating existing rows */
 update `customers` set `date_joined` = NOW() where `customer_id` = 1; 
+
