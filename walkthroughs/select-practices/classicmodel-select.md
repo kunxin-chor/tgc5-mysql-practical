@@ -31,3 +31,42 @@ Example:
 
     /* show phone numbers and city of offices in the USA*/
     select city,phone from offices where country="USA";
+
+### GROUP BY
+
+#### Find the count of each product line
+    SELECT `productLine`,count(*) FROM `products` GROUP BY `productLine`;
+
+### Find the max price of each product line
+    SELECT `productLine`,count(*) FROM `products` GROUP BY `productLine`;
+
+#### Find average credit limit for each country
+    SELECT `country`, AVG(`creditLimit`) FROM `customers` GROUP BY `country`;
+
+#### Find the average credit limit of each country, excluding rows that have credit limit of 0
+    SELECT `country`, AVG(`creditLimit`) FROM `customers` WHERE `creditLimit` > 0 GROUP BY `country`;
+
+### Find the number of custoemrs per country,but only show those countries with more than 5 customers
+    SELECT `country`, count(*) FROM `customers` GROUP BY `country` HAVING count(*) > 5
+
+
+# ORDER OF Statements
+    select <colnames>
+     from <table>
+        join <table> on <cond>
+    where <cond>
+    group by <col>
+        having <cond>
+    order by <col> ASC|DESC
+
+1. FROM and JOIN will happen first
+2. WHERE will happen
+3. GROUP BY
+4. SELECT
+5. HAVING
+6. ORDER BY
+
+# CHALLENGES
+
+## For each product group, find the product with the max buy price
+
