@@ -38,3 +38,19 @@
     where `customers`.`country` ='USA'
     group by `customerName` 
         HAVING avg(`amount`) >= 10000
+
+## Find all the orders that mention 'FedEx' in the comments
+    SELECT * FROM `orders` WHERE `comments` LIKE '%FedEx%'
+
+## Find all the orders that belongs to customer number 124 and show the contact first name and contact last name
+    SELECT   `orderNumber`,`customerName`, `contactFirstName`, `contactLastName` 
+    FROM `orders` JOIN `customers` 
+        ON `orders`.`customerNumber` = `customers`.`customerNumber`
+    WHERE `customers`.`customerNumber` = '124'
+
+## Display the line items for order 10101
+    SELECT `orders`.`orderNumber`, `productName`, `orderLineNumber` FROM `orders` 
+        JOIN `orderdetails`	ON `orders`.`orderNumber` = `orderdetails`.`orderNumber`
+        JOIN  `products` ON `orderdetails`.`productCode` = `products`.`productCode`
+    WHERE `orders`.`orderNumber` = '10101'
+    ORDER BY `orderLineNumber`

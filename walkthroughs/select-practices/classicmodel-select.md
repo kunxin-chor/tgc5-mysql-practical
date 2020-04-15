@@ -90,7 +90,14 @@ Example:
 ### Show the number of employees for each city
     SELECT `city`, COUNT(*) FROM `offices` JOIN `employees` ON `offices`.`officeCode` = `employees`.`officeCode` GROUP BY `city`
 
-    
+### Find all employees which job title begins with "Sales"
+    SELECT * FROM `employees` WHERE `jobTitle` LIKE 'Sales%';
+
+### Find all employees which job title ends with "Sales"
+    SELECT * FROM `employees` WHERE `jobTitle` LIKE '%Sales'    
+
+### Find all employees which job title contains "Sales"
+    SELECT * FROM `employees` WHERE `jobTitle` LIKE '%Sales%'
 
 # CHALLENGES
 
