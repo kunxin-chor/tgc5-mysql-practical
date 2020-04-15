@@ -26,3 +26,9 @@ alter table `customers`
 /* updating existing rows */
 update `customers` set `date_joined` = NOW() where `customer_id` = 1; 
 
+CREATE TABLE `products` (
+  `product_id` int(11) NOT NULL,
+  `price` float NOT NULL,
+  `stock` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(100) DEFAULT NULL
+);
