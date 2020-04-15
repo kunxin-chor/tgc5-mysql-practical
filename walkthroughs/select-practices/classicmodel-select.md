@@ -66,6 +66,32 @@ Example:
 5. HAVING
 6. ORDER BY
 
+## JOINS
+
+### Display the office address of each employee
+    SELECT `firstName`, `lastName`, `city`, `addressLine1`, `addressLine2`
+     FROM `employees` JOIN `offices` ON `employees`.`officeCode` = `offices`.`officeCode`
+
+### Display the office address of each employee based in Paris
+    SELECT `firstName`, `lastName`, `city`, `addressLine1`, `addressLine2`
+    FROM `employees` JOIN `offices` ON `employees`.`officeCode` = `offices`.`officeCode`
+    WHERE `city`='Paris';
+
+### Display the office address of each employee based in the USA
+    SELECT `firstName`, `lastName`, `city`, `addressLine1`, `addressLine2`
+     FROM `employees` JOIN `offices` ON `employees`.`officeCode` = `offices`.`officeCode`
+    WHERE `country`='USA'
+
+### Display the office address of each employee NOT based in USA
+    SELECT `firstName`, `lastName`, `city`, `addressLine1`, `addressLine2` FROM `employees` 
+    JOIN `offices` ON `employees`.`officeCode` = `offices`.`officeCode` 
+    WHERE `country`!='USA'
+
+### Show the number of employees for each city
+    SELECT `city`, COUNT(*) FROM `offices` JOIN `employees` ON `offices`.`officeCode` = `employees`.`officeCode` GROUP BY `city`
+
+    
+
 # CHALLENGES
 
 ## For each product group, find the product with the max buy price
