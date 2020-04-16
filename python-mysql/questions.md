@@ -10,3 +10,11 @@
     5. Display all the line items in the selected order
 
 ## Q4: Write a program in `offices.py` that asks the user for an office code, then show the number of employees in that office
+
+## Q5: Write an interactive program in `add-employee.py` that adds a new employee to the `employees` table:
+    1. Display the list of offices (their address and city) and office code
+    2. Ask the user to choose an office based on the office code
+    3. Display the list of employees in the selected office code
+    4. Ask the user to choose one to be the supervisor, or 0 for no supervisor
+    5. Ask the user for the following: first name, last name, extension, email and job title
+    6. Create thee new user, filling in the `officeCode` column and `reportsTo` as you do so.
