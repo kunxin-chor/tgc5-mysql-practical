@@ -1,0 +1,59 @@
+{% extends 'layout.template.html'%}
+
+{%block content%}
+
+    <pre>
+    {{sql}}
+    </pre>
+
+    <form method="GET">
+        <div>
+            <select name="selected_product_line">
+            <option value="">All</option>
+            {%for p in product_lines%}
+                <option value="{{p.productLine}}">{{p.productLine}}</option>
+            {%endfor%}
+            </select>
+        </div>
+        <div>
+            <input type="text" name="search-by" placeholder="Enter search terms"/>
+        </div>
+        <input type="submit" value="Search"/>
+    </form>
+
+       <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Product Code
+                    </th>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Product Line
+                    </th>
+                    <th>
+                        Vendor
+                    </th>
+                </tr>
+            </thead>
+            {%for result in products%}
+            <tr>
+                <td>
+                    {{result.productCode}}
+                </td>
+                <td>
+                    {{result.productName}}
+                </td>
+                <td>
+                    {{result.productLine}}
+                </td>
+                <td>
+                   {{result.productVendor}}
+                </td>
+            </tr>
+            {%endfor%}
+        </table>
+
+{%endblock%}
