@@ -58,6 +58,7 @@ Example:
     group by <col>
         having <cond>
     order by <col> ASC|DESC
+    limit <number of rows>
 
 1. FROM and JOIN will happen first
 2. WHERE will happen
@@ -65,6 +66,7 @@ Example:
 4. SELECT
 5. HAVING
 6. ORDER BY
+7. LIMIT
 
 ## JOINS
 
@@ -98,6 +100,22 @@ Example:
 
 ### Find all employees which job title contains "Sales"
     SELECT * FROM `employees` WHERE `jobTitle` LIKE '%Sales%'
+
+## DATE/TIME STUFF
+
+### Insert a new payment
+    insert into `payments` (`customerNumber`, `checkNumber`, `paymentDate`, `amount`)
+    VALUES
+        ('496', 'ABC12212', NOW(), '2500');
+
+### Find payment made within certaind days
+    select customerNumber, checkNumber, paymentDate, DATEDIFF(NOW(), `paymentDate`)  from `payments` where DATEDIFF(NOW(),`paymentDate`) <=3;
+
+### Display all payments sorted by date
+    select * from payments order by `paymentDate`;
+
+### DIsplay the top 10 payments made by amount
+    select * from payments order by `amount` DESC limit 10;
 
 # CHALLENGES
 
