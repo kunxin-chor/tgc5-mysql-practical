@@ -13,3 +13,11 @@ def get_connection(host,username, password, database_name):
 def create_cursor(conn):
     cursor = conn.cursor(pymysql.cursors.DictCursor)
     return cursor
+
+def get_product_lines(conn):
+    product_line_cursor = create_cursor(conn)
+
+    # get all the product lines
+    product_line_cursor.execute("""select `productLine` from `productlines`""")
+
+    return product_line_cursor

@@ -16,10 +16,7 @@ def index():
 @app.route('/search')
 def search():
     conn = data.get_connection('localhost', os.environ.get('C9_USER'), '', 'classicmodels')
-    product_line_cursor = data.create_cursor(conn)
-
-    # get all the product lines
-    product_line_cursor.execute("""select `productLine` from `productlines`""")
+    product_line_cursor =data.get_product_lines(conn)
 
     # create the query
     sql = """select * from `products` where 1"""
@@ -39,6 +36,40 @@ def search():
     products_cursor.execute(sql)
 
     return render_template('search.template.html', product_lines=product_line_cursor, products=products_cursor, sql=sql)
+
+@app.route('/create-product')
+def create_product():
+    conn = data.get_connection('localhost', os.environ.get('C9_USER'), '', 'classicmodels')
+    product_lines = data.get_product_lines(conn)
+    return render_template('create_product.template.html', product_lines=product_lines)
+
+@app.route('/create-product', methods=['POST'])
+def process_create_product():
+    # extract out all the variables from the form
+    product_code = request.form.get('productCode')
+    product_name = request.form.get('productName')
+    product_line = request.form.get('productLine')
+    product_vendor = "default vendor"
+    product_scale = 100
+    product_description = "Desc"
+    quantity_in_stock = 10
+    buy_price = 19.99
+    MSRP = 25.00
+
+
+    # prepare the SQL
+    sql = f"""
+        insert into `products` (`productCode`, `productName`, `productLine`, `productScale`, `productVendor`, `productDescription`, `quantityInStock`, `buyPrice`, `MSRP`)
+        VALUES
+            ('{product_code}', '{product_name}', '{product_line}',
+            '{product_scale}', '{product_vendor}','{product_description}', '{quantity_in_stock}', '{buy_price}', '{MSRP}'  )
+    """
+
+    conn = data.get_connection('localhost', os.environ.get('C9_USER'), '', 'classicmodels')
+    cursor = data.create_cursor(conn)
+    cursor.execute(sql)
+    conn.commit()
+    return redirect(url_for('search'))
 
 
 # "magic code" -- boilerplate

@@ -13,3 +13,4 @@ def get_connection(host,username, password, database_name):
 def create_cursor(conn):
     cursor = conn.cursor(pymysql.cursors.DictCursor)
     return cursor
+

@@ -1,0 +1,16 @@
+{% extends 'layout.template.html' %}
+
+{%block content %}
+
+<form method="POST">
+    <input type="productName" placeholder="Product Name" name="productName"/><br/>
+    <input type="productCode" placeholder="Product Code" name="productCode"/><br/>
+    <select name="productLine">
+    {% for p in product_lines %}
+    <option value="{{p.productLine}}">{{p.productLine}}</option>
+    {% endfor %}
+    </select>
+    <input type="submit"/>
+</form>
+
+{%endblock%}
