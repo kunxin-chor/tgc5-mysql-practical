@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
 import data
+import dao
 
 app = Flask(__name__)
+
+def get_connection():
+    return data.get_connection('localhost', os.environ.get('C9_USER'), '', 'classicmodels')
 
 @app.route('/')
 def index():
@@ -56,7 +60,6 @@ def process_create_product():
     buy_price = 19.99
     MSRP = 25.00
 
-
     # prepare the SQL
     sql = f"""
         insert into `products` (`productCode`, `productName`, `productLine`, `productScale`, `productVendor`, `productDescription`, `quantityInStock`, `buyPrice`, `MSRP`)
@@ -70,6 +73,18 @@ def process_create_product():
     cursor.execute(sql)
     conn.commit()
     return redirect(url_for('search'))
+
+@app.route('/customers')
+def show_customers():
+    conn = get_connection()
+    customers = dao.get_customers(conn)
+    return render_template('customers.template.html', results=customers)
+
+
+@app.route('/show_customer_orders/<customer_number>')
+def show_customer_orders(customer_number):
+    return customer_number
+
 
 
 # "magic code" -- boilerplate
