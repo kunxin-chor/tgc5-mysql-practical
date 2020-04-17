@@ -117,7 +117,6 @@ def show_customer_orders(customer_number):
 
     # 3.4 STORE RESULTS IN A VARIABLE
     orders = order_cursor.fetchall()
-    
     # 3.0 RENDER TEMPLATE
     return render_template('show_customer_order.template.html',results=orders, customer=customer)
 

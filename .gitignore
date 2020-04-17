@@ -1,3 +1,4 @@
 public/phpmyadmin
 __pycache__
 pytest_cache
+.env
