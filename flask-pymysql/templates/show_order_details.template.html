@@ -1,0 +1,35 @@
+{% extends 'layout.template.html' %}
+
+{%block content %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Line Number</th>
+            <th>Product Code</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for r in results%}
+
+        <tr>
+            <td>
+                {{r.orderLineNumber}}
+            </td>
+            <td>
+                {{r.productCode}}
+            </td>
+            <td>
+                {{r.productName}}
+            </td>
+            <td>
+                {{r.quantityOrdered}}
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+{%endblock%}

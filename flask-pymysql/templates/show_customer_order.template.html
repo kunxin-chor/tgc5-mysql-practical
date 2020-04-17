@@ -1,0 +1,17 @@
+{% extends 'layout.template.html' %}
+
+{%block content %}
+<h1>Order for customer number: {{customer.customerName}}</h1>
+
+{%for r in results %}
+<div class="card">
+    <ul>
+        <li>Order Number: <a href="{{ url_for('show_order_details', order_number=r.orderNumber)  }}">{{r.orderNumber}}</a></li>
+        <li>Order date: {{r.orderDate}}</li>
+        <li>Status: {{r.status}}</li>
+        <li>Comments: {{r.comments}}</li>
+        <li>Customer Number: {{r.customerNumber}} </li>
+    </ul>
+</div>
+{%endfor%}
+{%endblock%}

@@ -83,8 +83,17 @@ def show_customers():
 
 @app.route('/show_customer_orders/<customer_number>')
 def show_customer_orders(customer_number):
-    return customer_number
+    conn = get_connection()
+    customer = dao.get_customer_by_customer_number(conn, customer_number)
+    orders = dao.get_orders_for_customer(conn, customer_number)
+    # since order_cursor is pointing to only one result, we use fetchone() to get that one result
+    return render_template('show_customer_order.template.html',results=orders, customer=customer)
 
+@app.route('/show_order_details/<order_number>')
+def show_order_details(order_number):
+    conn = get_connection()
+    details = dao.get_order_details(conn, order_number)
+    return render_template('show_order_details.template.html', results=details)
 
 
 # "magic code" -- boilerplate
