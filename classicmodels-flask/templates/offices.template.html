@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Office Code</th>
+                <th>City</th>
+                <th>Address Line 1</th>
+                <th>Address Line 2</th>
+            </tr>
+        </thead>
+        <tbody>
+        {%for r in results %}
+            <tr>
+                <td><a href="{{ url_for('show_employees_in_office', office_code = r.officeCode )}}">{{r.officeCode}}</td>
+                <td>{{r.city}}</td>
+                <td>{{r.addressLine1}}</td>
+                <td>{{r.addressLine2}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -83,10 +83,42 @@ def show_customers():
 
 @app.route('/show_customer_orders/<customer_number>')
 def show_customer_orders(customer_number):
-    conn = get_connection()
-    customer = dao.get_customer_by_customer_number(conn, customer_number)
-    orders = dao.get_orders_for_customer(conn, customer_number)
+    # conn = get_connection()
+    # customer = dao.get_customer_by_customer_number(conn, customer_number)
+    # orders = dao.get_orders_for_customer(conn, customer_number)
     # since order_cursor is pointing to only one result, we use fetchone() to get that one result
+
+    # 1. GET CONNECTION
+    conn = pymysql.connect(host='localhost', user=os.environ.get('C9_USER'), password="",database="classicmodels" )
+
+    # 2. QUERY 1 - Get customer
+
+    # 2.1 GET CURSOR
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    # 2.2 WRITE QUERY
+    sql = f"select * from customers WHERE customer_number={customer_number}"
+    # 2.3 EXECUTE QUERY
+    cursor.execute(sql)
+    # 2.4 STORE RESULTS
+    customer = cursor.fetchone()
+
+    # 3. QUERY 2 - Get orders
+   
+    # 3.1 GET CURSOR
+     order_cursor = conn.cursor(pymysql.cursors.DictCursor)
+
+
+    # 3.2 WRITE QUERY
+    sql = f"SELECT * from orders where customer_number={customer_number}"
+
+    # 3.3 EXECUTE QUERY
+    order_cursor.execute(sql)
+
+
+    # 3.4 STORE RESULTS IN A VARIABLE
+    orders = order_cursor.fetchall()
+    
+    # 3.0 RENDER TEMPLATE
     return render_template('show_customer_order.template.html',results=orders, customer=customer)
 
 @app.route('/show_order_details/<order_number>')
@@ -94,6 +126,7 @@ def show_order_details(order_number):
     conn = get_connection()
     details = dao.get_order_details(conn, order_number)
     return render_template('show_order_details.template.html', results=details)
+
 
 
 # "magic code" -- boilerplate

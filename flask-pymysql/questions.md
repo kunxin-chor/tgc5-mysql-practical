@@ -3,7 +3,7 @@
 Using the `classicmodels` database, and adding to `app.py`, create the following routes
 
 ## /offices
-Display all the offices there are in the system, showing each office's city and address. When the useer clicks on an office,
+Display all the offices there are in the system, showing each office's city and address. When the user clicks on an office,
 displays all the employees that there in the office in the route `/show_employees_in_office/<office_code>`
 
 ## /employees
