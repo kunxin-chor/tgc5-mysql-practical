@@ -177,6 +177,23 @@ def process_create_office():
     pass
 
 
+# the <employee_number> route parameter is the primary key of the employee we want to delete
+@app.route('/delete_employee/<employee_number>')
+def delete_employee(employee_number):
+
+    #1 Get the connection
+    conn = pymysql.connect(host='localhost', user=os.environ.get('C9_USER'), password='', database='classicmodels')
+
+    #2 Get the cursor
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    
+    #3 form the sql
+    sql = f"delete from `employees` WHERE employeeNumber = '{employee_number}'"
+
+    #4 execute the sql
+    cursor.execute(sql)
+
+    return "deleted"
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
