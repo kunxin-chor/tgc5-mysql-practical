@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="{{ url_for('delete_employee', employee_number=employee_number) }}">
+        <label>Are you sure you want to delete? </label>
+        <input type="submit" value="Confirm"/>
+        <a href="{{ url_for('show_employees') }}">Cancel</a>
+    </form>
+</body>
+</html>

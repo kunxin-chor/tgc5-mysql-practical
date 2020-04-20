@@ -82,6 +82,26 @@ def process_update_office(office_code):
 
     return redirect(url_for('show_offices'))
 
+@app.route('/employees')
+def show_employees():
+    
+    # STEP 1 - create connection
+    conn = pymysql.connect(host='localhost', user=os.environ.get('C9_USER'), password='', database='classicmodels')
+
+    # STEP 2
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+
+    # STEP 3
+    sql = "select * from `employees`"
+
+    # STEP 4
+    cursor.execute(sql)
+
+    # STEP 5
+    results = cursor.fetchall()
+
+    return render_template('show_employees.template.html', results=results)
+
 @app.route('/update_employee/<employee_number>')
 def edit_employees(employee_number):
 
@@ -177,8 +197,12 @@ def process_create_office():
     pass
 
 
+@app.route('/confirm_delete_employee/<employee_number>')
+def confirm_delete_employee(employee_number):
+    return render_template('confirm_delete_employee.template.html', employee_number = employee_number)
+
 # the <employee_number> route parameter is the primary key of the employee we want to delete
-@app.route('/delete_employee/<employee_number>')
+@app.route('/delete_employee/<employee_number>', methods=['POST'])
 def delete_employee(employee_number):
 
     #1 Get the connection
@@ -193,7 +217,10 @@ def delete_employee(employee_number):
     #4 execute the sql
     cursor.execute(sql)
 
-    return "deleted"
+    #5. commit
+    conn.commit()
+
+    return redirect(url_for('show_employees'))
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
